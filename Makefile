@@ -1,5 +1,5 @@
 postgres:
-	docker run --name postgres -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=Hoanglong2502 -d postgres
+	docker run --name postgres --network bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=Hoanglong2502 -d postgres
 
 createdb:
 	docker exec -it postgres createdb --username=root --owner=root simple_bank
@@ -18,7 +18,6 @@ migratedown:
 
 migratedown1:
 	migrate -path db/migration -database "postgresql://root:Hoanglong2502@localhost:5432/simple_bank?sslmode=disable" -verbose down 1
-
 
 sqlc:
 	sqlc generate
