@@ -42,7 +42,7 @@ jobs:
           go-version: '1.23'
 
       - name: Run migrations
-        uses: make migrate up
+        run: make migrate up
 
       - name: Test
         run: make test
