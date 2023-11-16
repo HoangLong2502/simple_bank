@@ -4,8 +4,8 @@ WORKDIR /app
 COPY . .
 RUN go build -o main main.go
 
-# Bởi vì defaul linux alpine không có curl
-# Sử dụng câu lệnh để thêm curl phục vụ câu lệnh tiếp theo
+#Bởi vì defaul linux alpine không có curl
+#Sử dụng câu lệnh để thêm curl phục vụ câu lệnh tiếp theo
 RUN apk add curl
 
 # Dòng lệnh bạn đang thấy trong Dockerfile là để tải về và giải nén [Golang Migrate](https://github.com/golang-migrate/migrate) từ [GitHub Releases](https://github.com/golang-migrate/migrate/releases) vào hình ảnh Docker.
