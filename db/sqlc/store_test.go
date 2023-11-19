@@ -14,7 +14,7 @@ func TestTransferTx(t *testing.T) {
 	account1 := createRandomAccount(t)
 	account2 := createRandomAccount(t)
 
-	// run n concurent transfer transactions
+	// run n concurrent transfer transactions
 	n := 5
 	amount := int64(100)
 
@@ -46,7 +46,7 @@ func TestTransferTx(t *testing.T) {
 		result := <-results
 		require.NotEmpty(t, result)
 
-		//check tranfer
+		//check transfer
 		transfer := result.Tranfer
 		require.NotEmpty(t, transfer)
 		require.Equal(t, account1.ID, transfer.FromAccountID)
