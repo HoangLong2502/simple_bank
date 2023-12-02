@@ -21,7 +21,7 @@ func NewStore(db *sql.DB) *Store {
 }
 
 // execTx executes a function within a database transaction
-func (store *Store) exectTx(ctx context.Context, fn func(*Queries) error) error {
+func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
 	tx, err := store.db.BeginTx(ctx, nil)
 	if err != nil {
 		return err
@@ -39,7 +39,7 @@ func (store *Store) exectTx(ctx context.Context, fn func(*Queries) error) error 
 	return tx.Commit()
 }
 
-// TransferTxParams contains the input parameters of the tranfer transaction
+// TransferTxParams contains the input parameters of the transfer transaction
 type TransferTxParams struct {
 	FromAccountId int64 `json:"from_account_id"`
 	ToAccountId   int64 `json:"to_account_id"`
@@ -48,7 +48,7 @@ type TransferTxParams struct {
 
 // TransferTxResult is the result of the transfer
 type TransferTxResult struct {
-	Tranfer     Tranfer `json:"transfer"`
+	Transfer    Tranfer `json:"transfer"`
 	FromAccount Account `json:"from_account"`
 	ToAccount   Account `json:"to_account"`
 	FromEntry   Entry   `json:"from_entry"`
@@ -60,10 +60,10 @@ type TransferTxResult struct {
 func (store *Store) TranferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
 	var result TransferTxResult
 
-	err := store.exectTx(ctx, func(q *Queries) error {
+	err := store.execTx(ctx, func(q *Queries) error {
 		var err error
 
-		result.Tranfer, err = q.CreateTransfer(ctx, CreateTransferParams{
+		result.Transfer, err = q.CreateTransfer(ctx, CreateTransferParams{
 			FromAccountID: arg.FromAccountId,
 			ToAccountID:   arg.ToAccountId,
 			Amount:        arg.Amount,
